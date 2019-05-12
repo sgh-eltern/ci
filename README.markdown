@@ -70,7 +70,7 @@ $ bundle update
 
 # Pipeline
 
-* Base image is in `Dockerfile` and automatically built on [cloud.docker.com](https://cloud.docker.com/app/sghakinternet/repository/docker/sghakinternet/wiki)
+* Base image is in `Dockerfile` and automatically built on [cloud.docker.com](https://cloud.docker.com/u/sghakinternet/repository/docker/sghakinternet/ci)
 
 * Backup user authenticates with private key:
   - Keys were generated with `ssh-keygen -t rsa -b 4096 -C "backup-pipeline@eltern-sgh.de" -f id_backup-pipeline`
