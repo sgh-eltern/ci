@@ -84,7 +84,7 @@ $ bundle update
 
 # Test
 
-## Schedule for Ghost
+## Schedule for Ghost Inspector Tests
 
           | Eltern | Wiki | Freunde | GEB
 ----------|:------:|:----:|:-------:|:---:

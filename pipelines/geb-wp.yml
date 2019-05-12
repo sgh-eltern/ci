@@ -3,7 +3,7 @@ groups:
     jobs:
     - Backup GEB WP Database
     - Backup GEB WP Files
-    # - Test GEB Website
+    # - Test GEB WP Website
 
 jobs:
   - name: Backup GEB WP Database
@@ -17,7 +17,7 @@ jobs:
       params:
         user: ((strato.user))
         ssh_key: ((strato.ssh-key))
-        pointer_file: backup/geb3-wp-db/latest
+        pointer_file: backup/geb-wp-db/latest
     - task: Store Backup in B2
       file: ci-tasks/tasks/store-backup/task.yml
       params:
@@ -37,7 +37,7 @@ jobs:
       params:
         user: ((strato.user))
         ssh_key: ((strato.ssh-key))
-        pointer_file: backup/geb3-wp-files/latest
+        pointer_file: backup/geb-wp-files/latest
     - task: Store Backup in B2
       file: ci-tasks/tasks/store-backup/task.yml
       params:
@@ -50,7 +50,7 @@ jobs:
   #   plan:
   #   - get: ci-tasks
   #     trigger: false
-  #   - get: Schedule for GEB
+  #   - get: Ghost Inspector Schedule for GEB WP
   #     trigger: true
   #   - task: Execute Test on Ghost Inspector
   #     file: ci-tasks/tasks/fetch-result/task.yml
@@ -70,8 +70,8 @@ resources:
     type: time
     source: {interval: 24h}
 
-  - name: Schedule for GEB
-    type: time
-    source:
-      interval: 24h
-      days: [Tuesday, Wednesday, Thursday, Saturday, Sunday]
+  # - name: Ghost Inspector Schedule for GEB WP
+  #   type: time
+  #   source:
+  #     interval: 24h
+  #     days: [Tuesday, Wednesday, Thursday, Saturday, Sunday]

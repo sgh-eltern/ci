@@ -50,7 +50,7 @@ jobs:
     plan:
     - get: ci-tasks
       trigger: false
-    - get: Schedule for SGH Wiki
+    - get: Ghost Inspector Schedule for SGH Wiki
       trigger: true
     - task: Execute Test on Ghost Inspector
       file: ci-tasks/tasks/fetch-result/task.yml
@@ -70,7 +70,7 @@ resources:
     type: time
     source: {interval: 24h}
 
-  - name: Schedule for SGH Wiki
+  - name: Ghost Inspector Schedule for SGH Wiki
     type: time
     source:
       interval: 24h

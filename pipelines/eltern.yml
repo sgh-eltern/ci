@@ -50,7 +50,7 @@ jobs:
     plan:
     - get: ci-tasks
       trigger: false
-    - get: Schedule for SGH Eltern
+    - get: Ghost Inspector Schedule for SGH Eltern
       trigger: true
     - task: Execute Test on Ghost Inspector
       file: ci-tasks/tasks/fetch-result/task.yml
@@ -70,7 +70,7 @@ resources:
     type: time
     source: {interval: 24h}
 
-  - name: Schedule for SGH Eltern
+  - name: Ghost Inspector Schedule for SGH Eltern
     type: time
     source:
       interval: 24h
