@@ -1,0 +1,77 @@
+groups:
+- name: Eltern
+  jobs:
+  - Backup Eltern Database
+  - Backup Eltern Files
+  - Test Eltern Website
+
+jobs:
+  - name: Backup Eltern Database
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest Database Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/eltern-wp-db/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Backup Eltern Files
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest File Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/eltern-wp-files/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Test Eltern Website
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: Schedule for SGH Eltern
+      trigger: true
+    - task: Execute Test on Ghost Inspector
+      file: ci-tasks/tasks/fetch-result/task.yml
+      params:
+        url: https://api.ghostinspector.com/v1/suites/5980dea61599c8322646cba8/execute/?apiKey=((ghost.api-key))
+    - task: Evaluate Test Results
+      file: ci-tasks/tasks/evaluate-result/task.yml
+
+resources:
+  - name: ci-tasks
+    type: git
+    source:
+      uri: https://github.com/sgh-eltern/ci.git
+      branch: master
+
+  - name: nightly
+    type: time
+    source: {interval: 24h}
+
+  - name: Schedule for SGH Eltern
+    type: time
+    source:
+      interval: 24h
+      days: [Monday, Tuesday, Wednesday, Thursday, Friday, Sunday]

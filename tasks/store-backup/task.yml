@@ -1,0 +1,21 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: sghakinternet/wiki}
+
+inputs:
+  - name: ci-tasks
+  - name: backup
+
+outputs:
+
+params:
+  - access_key_id:
+  - secret_access_key:
+  - endpoint:
+  - bucket:
+
+run:
+  path: ci-tasks/tasks/store-backup/task.sh

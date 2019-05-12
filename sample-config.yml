@@ -1,0 +1,16 @@
+mediawiki:
+  source_db: DB1234567
+  source_user: U1234567
+  source_password: supers3cret
+
+  target_db: DB2345678
+  target_user: U2345678
+  target_password: nowayt0guess
+
+  secret_key: some-random-value
+  upgrade_key: other-random-string
+
+eltern-wp:
+  source_db: DB3456789
+  source_user: U3456789
+  source_password: evenm0res3cret

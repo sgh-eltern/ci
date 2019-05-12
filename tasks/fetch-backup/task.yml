@@ -1,0 +1,21 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: sghakinternet/wiki}
+
+inputs:
+  - name: ci-tasks
+
+outputs:
+  - name: backup
+
+params:
+  - host: ssh.strato.de
+  - user:
+  - ssh_key:
+  - pointer_file:
+
+run:
+  path: ci-tasks/tasks/fetch-backup/task.sh

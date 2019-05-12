@@ -1,0 +1,62 @@
+---
+blobstore:
+  endpoint: https://api.backblaze.com
+  bucket: sgh-backup
+  access-key-id: 5edb485e5cbc
+  secret-access-key: 001cdddd2cafd5641035dadaccbe1cce1cf44060c6
+ghost:
+  api-key: 369c2117e5de160f454a5012b428998a6284bc60
+strato:
+  user: backup-pipeline@eltern-sgh.de
+  ssh-key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    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
+    -----END RSA PRIVATE KEY-----

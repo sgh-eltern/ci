@@ -1,0 +1,77 @@
+groups:
+  - name: GEB
+    jobs:
+    - Backup GEB Database
+    - Backup GEB Files
+    - Test GEB Website
+
+jobs:
+  - name: Backup GEB Database
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest Database Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/geb3-db/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Backup GEB Files
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest File Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/geb3-files/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Test GEB Website
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: Schedule for GEB
+      trigger: true
+    - task: Execute Test on Ghost Inspector
+      file: ci-tasks/tasks/fetch-result/task.yml
+      params:
+        url: https://api.ghostinspector.com/v1/suites/5980f61fb1c3a81c61f4d6ac/execute/?apiKey=((ghost.api-key))
+    - task: Evaluate Test Results
+      file: ci-tasks/tasks/evaluate-result/task.yml
+
+resources:
+  - name: ci-tasks
+    type: git
+    source:
+      uri: https://github.com/sgh-eltern/ci.git
+      branch: master
+
+  - name: nightly
+    type: time
+    source: {interval: 24h}
+
+  - name: Schedule for GEB
+    type: time
+    source:
+      interval: 24h
+      days: [Tuesday, Wednesday, Thursday, Saturday, Sunday]

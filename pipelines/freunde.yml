@@ -1,0 +1,77 @@
+groups:
+- name: Freunde
+  jobs:
+  - Backup Freunde Database
+  - Backup Freunde Files
+  - Test Freunde Website
+
+jobs:
+  - name: Backup Freunde Database
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest Database Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/freunde-wp-db/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Backup Freunde Files
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: nightly
+      trigger: true
+    - task: Fetch Latest File Backup from Strato
+      file: ci-tasks/tasks/fetch-backup/task.yml
+      params:
+        user: ((strato.user))
+        ssh_key: ((strato.ssh-key))
+        pointer_file: backup/freunde-wp-files/latest
+    - task: Store Backup in B2
+      file: ci-tasks/tasks/store-backup/task.yml
+      params:
+        endpoint: ((blobstore.endpoint))
+        bucket: ((blobstore.bucket))
+        access_key_id: ((blobstore.access-key-id))
+        secret_access_key: ((blobstore.secret-access-key))
+
+  - name: Test Freunde Website
+    plan:
+    - get: ci-tasks
+      trigger: false
+    - get: Schedule for Freunde
+      trigger: true
+    - task: Execute Test on Ghost Inspector
+      file: ci-tasks/tasks/fetch-result/task.yml
+      params:
+        url: https://api.ghostinspector.com/v1/suites/5980f616b1c3a81c61f4d6ab/execute/?apiKey=((ghost.api-key))
+    - task: Evaluate Test Results
+      file: ci-tasks/tasks/evaluate-result/task.yml
+
+resources:
+  - name: ci-tasks
+    type: git
+    source:
+      uri: https://github.com/sgh-eltern/ci.git
+      branch: master
+
+  - name: nightly
+    type: time
+    source: {interval: 24h}
+
+  - name: Schedule for Freunde
+    type: time
+    source:
+      interval: 24h
+      days: [Monday, Wednesday, Saturday, Sunday]

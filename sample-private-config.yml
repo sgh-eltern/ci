@@ -1,0 +1,14 @@
+---
+blobstore:
+  endpoint: https://s3.example.com/
+  bucket: my-backup-bucket
+  access-key-id: something
+  secret-access-key: very secret
+ghost:
+  api-key: something-pretty-random
+strato:
+  user: me@example.com
+  ssh-key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----

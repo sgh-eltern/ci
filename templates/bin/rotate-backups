@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generated from <%= template %>
+
+require_relative 'backup_repository'
+require 'pathname'
+
+case ARGV.size
+when 0
+  warn 'Error: Missing argument for the root folder'
+  exit 1
+when 1
+  repo = SGH::BackupRepository.new(Pathname(ARGV.first))
+  repo.retain!
+else
+  warn 'Error: Excess arguments. Expecting exactly one argument.'
+  exit 2
+end

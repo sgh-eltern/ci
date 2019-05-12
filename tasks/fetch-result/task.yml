@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: sghakinternet/wiki}
+
+inputs:
+  - name: ci-tasks
+
+outputs:
+  - name: result
+
+params:
+  - url:
+
+run:
+  path: ci-tasks/tasks/fetch-result/task.sh
