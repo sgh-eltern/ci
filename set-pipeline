@@ -20,8 +20,7 @@ set-pipeline(){
     --target "$CONCOURSE_TARGET" \
     --pipeline="$PIPELINE_NAME" \
     --config="${SCRIPT_PATH}/pipeline.yml" \
-    --load-vars-from="${SCRIPT_PATH}/private-config.yml" \
-    --non-interactive
+    --load-vars-from="${SCRIPT_PATH}/private-config.yml"
 }
 
 unpause() {

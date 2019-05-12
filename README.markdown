@@ -1,4 +1,4 @@
-# CI
+# CI for SGH Elternbeirat
 
 [![Build Status](https://travis-ci.org/sgh-eltern/ci.svg?branch=master)](https://travis-ci.org/sgh-eltern/ci)
 
