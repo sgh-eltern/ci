@@ -1,4 +1,5 @@
 .envrc
+.rake_tasks
 config.yml
 deployment
 pipeline.yml
