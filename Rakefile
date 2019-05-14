@@ -62,7 +62,7 @@ end
 namespace :ci do
   desc 'Run shellcheck for CI scripts'
   task 'shellcheck' do |file|
-    sh %(shellcheck --exclude SC2154 ci/*/task.sh) do |ok, process_status|
+    sh %(shellcheck --exclude SC2154 tasks/*/task.sh) do |ok, process_status|
       if !ok
         fail 'The shellcheck findings listed above need to be fixed.'
       end

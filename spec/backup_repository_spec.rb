@@ -165,12 +165,8 @@ describe SGH::BackupRepository do
     end
   end
 
-  xcontext 'when it is the last day of the year' do
-    it "copies today's backup into the yearly folder" do
-    end
-
-    it 'deletes files older than 10 years from the yearly folder' do
-      # yearly backups of the last ten years are kept
-    end
+  context 'when it is the last day of the year' do
+    it "copies today's backup into the yearly folder"
+    it 'deletes files older than 10 years from the yearly folder'
   end
 end
