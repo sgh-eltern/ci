@@ -1,5 +1,6 @@
 .envrc
 .rake_tasks
 config.yml
+private-config.yml
 deployment
 pipeline.yml

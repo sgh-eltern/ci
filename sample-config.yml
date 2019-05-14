@@ -1,3 +1,4 @@
+---
 mediawiki:
   source_db: DB1234567
   source_user: U1234567
@@ -14,3 +15,19 @@ eltern-wp:
   source_db: DB3456789
   source_user: U3456789
   source_password: evenm0res3cret
+
+blobstore:
+  endpoint: https://s3.example.com/
+  bucket: my-backup-bucket
+  access-key-id: something
+  secret-access-key: very secret
+
+ghost:
+  api-key: something-pretty-random
+
+strato:
+  user: me@example.com
+  ssh-key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----

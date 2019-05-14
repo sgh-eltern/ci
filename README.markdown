@@ -77,10 +77,7 @@ $ bundle update
   - Private key added as note to Lastpass entry 'SGH/ssh.strato.de'
   - Public key added to `~/.ssh/authorized_keys` in ssh.strato.de with `ssh-copy-id -i id_backup-pipeline.pub eltern-sgh.de@ssh.strato.de`
 
-## Operating the Pipeline
-
-1. Copy `sample-private-config.yml` to `private-config.yml` and fill in the values. Do not add this to the repo!
-1. Call `set-pipeline` in order to apply the config.
+* Call `set-pipeline` in order to apply the config (with private stuff in `config.yml`).
 
 # Test
 
