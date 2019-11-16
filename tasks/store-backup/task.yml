@@ -12,10 +12,10 @@ inputs:
 outputs:
 
 params:
-  - access_key_id:
-  - secret_access_key:
-  - endpoint:
-  - bucket:
+  access_key_id:
+  secret_access_key:
+  endpoint:
+  bucket:
 
 run:
   path: ci-tasks/tasks/store-backup/task.sh

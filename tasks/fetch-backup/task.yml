@@ -12,10 +12,10 @@ outputs:
   - name: backup
 
 params:
-  - host: ssh.strato.de
-  - user:
-  - ssh_key:
-  - pointer_file:
+  host: ssh.strato.de
+  user:
+  ssh_key:
+  pointer_file:
 
 run:
   path: ci-tasks/tasks/fetch-backup/task.sh

@@ -12,7 +12,7 @@ outputs:
   - name: result
 
 params:
-  - url:
+  url:
 
 run:
   path: ci-tasks/tasks/fetch-result/task.sh

@@ -9,9 +9,5 @@ inputs:
   - name: ci-tasks
   - name: result
 
-outputs:
-
-params:
-
 run:
   path: ci-tasks/tasks/evaluate-result/task.sh
