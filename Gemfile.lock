@@ -44,7 +44,7 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     highline (1.7.10)
-    json (2.2.0)
+    json (2.3.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.0.8)
